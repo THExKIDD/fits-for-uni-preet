@@ -64,9 +64,9 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
     const redirectURL = handleRedirectProductListpage()
     
     return (
-        <div className='bg-gray-50 py-4 dark:bg-gray-800'>
+        <div className='bg-gray-50 py-4 dark:bg-gray-800 dark:text-white'>
             <div className='container mx-auto p-4 flex items-center justify-between gap-4'>
-                <h3 className='font-semibold text-lg md:text-xl text-gray-800'>{name}</h3>
+                <h3 className='font-semibold text-lg md:text-xl text-gray-800 dark:text-white'>{name}</h3>
                 <Link 
                     to={redirectURL} 
                     className='text-red-600 hover:text-red-400 font-medium transition-colors'
@@ -76,14 +76,14 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
             </div>
             <div className='relative flex items-center'>
                 <div 
-                    className='flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth' 
+                    className='dark:text-white flex gap-4 md:gap-6 lg:gap-8 container mx-auto px-4 overflow-x-scroll scrollbar-none scroll-smooth' 
                     ref={containerRef}
                 >
                     {loading &&
                         loadingCardNumber.map((_, index) => (
                             <CardLoading 
                                 key={"CategorywiseProductDisplay123" + index} 
-                                className='bg-red-50 animate-pulse dark:bg-gray-700'
+                                className='bg-red-50 animate-pulse dark:bg-gray-700 dark:text-white'
                             />
                         ))
                     }
@@ -92,11 +92,11 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
                         <CardProduct
                             data={p}
                             key={p._id + "CategorywiseProductDisplay" + index}
-                            className='hover:shadow-md transition-shadow '
+                            className='dark:text-white hover:shadow-md transition-shadow '
                         />
                     ))}
                 </div>
-                <div className='w-full left-0 right-0 container mx-auto px-2 absolute hidden lg:flex justify-between'>
+                <div className='w-full left-0 right-0 container mx-auto px-2 absolute hidden lg:flex justify-between dark:text-white'>
                     <button 
                         onClick={handleScrollLeft} 
                         className='dark:bg-gray-700 dark:text-white z-10 relative bg-white hover:bg-red-50 shadow-lg text-lg p-2 rounded-full border border-gray-200 '

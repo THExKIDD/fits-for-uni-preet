@@ -1,68 +1,77 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-    name : {
-        type : String,
+    name: {
+        type: String,
     },
-    image : {
-        type : Array,
-        default : []
+    image: {
+        type: Array,
+        default: []
     },
-    category : [
+    category: [
         {
-            type : mongoose.Schema.ObjectId,
-            ref : 'category'
+            type: mongoose.Schema.ObjectId,
+            ref: 'category'
         }
     ],
-    subCategory : [
+    subCategory: [
         {
-            type : mongoose.Schema.ObjectId,
-            ref : 'subCategory'
+            type: mongoose.Schema.ObjectId,
+            ref: 'subCategory'
         }
     ],
-    unit : {
-        type : String,
-        default : ""
+    sizes: [ // New field for sizes
+        {
+            size: {
+                type: String,
+                enum: ["freesize", "S", "M", "L", "XL", "XXL", "XXXL"], // Add more sizes if needed
+                required: true
+            },
+            stock: {
+                type: Number,
+                default: 0
+            },
+            unit: {
+                type: String,
+                default: ""
+            }
+        }
+    ],
+    price: {
+        type: Number,
+        default: null
     },
-    stock : {
-        type : Number,
-        default : null
+    discount: {
+        type: Number,
+        default: null
     },
-    price : {
-        type : Number,
-        default : null
+    description: {
+        type: String,
+        default: ""
     },
-    discount : {
-        type : Number,
-        default : null
+    more_details: {
+        type: Object,
+        default: {}
     },
-    description : {
-        type : String,
-        default : ""
-    },
-    more_details : {
-        type : Object,
-        default : {}
-    },
-    publish : {
-        type : Boolean,
-        default : true
+    publish: {
+        type: Boolean,
+        default: true
     }
-},{
-    timestamps : true
-})
+}, {
+    timestamps: true
+});
 
-//create a text index
+// Create a text index
 productSchema.index({
-    name  : "text",
-    description : 'text'
-},{
-    name : 10,
-    description : 5
-})
+    name: "text",
+    description: 'text'
+}, {
+    weights: {
+        name: 10,
+        description: 5
+    }
+});
 
-productSchema.cre
+const ProductModel = mongoose.model('product', productSchema);
 
-const ProductModel = mongoose.model('product',productSchema)
-
-export default ProductModel
+export default ProductModel;
